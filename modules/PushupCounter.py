@@ -3,8 +3,9 @@ import cv2
 class PushupCounter:
     """计数模块"""
     
-    def __init__(self, detector):
+    def __init__(self, detector, confidence=0.6):
         self.detector = detector
+        self.confidence = confidence
         self.reset()
     
     def reset(self):
@@ -15,7 +16,7 @@ class PushupCounter:
     def update(self, frame):
         state, confidence, annotated_frame = self.detector.detect(frame)
         
-        if state and confidence > 0.7:
+        if state and confidence > self.confidence:
             if state == 'bottom' and not self.in_bottom:
                 self.in_bottom = True
             elif state == 'ready' and self.in_bottom:
