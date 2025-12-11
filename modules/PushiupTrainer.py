@@ -7,11 +7,11 @@ from sklearn.metrics import classification_report
 
 
 class PushupTrainer:
-    def __init__(self):
+    def __init__(self,n_estimators=100, max_depth=15, random_state=42):
         self.model = RandomForestClassifier(
-            n_estimators=100,
-            max_depth=15,
-            random_state=42,
+            n_estimators=n_estimators,
+            max_depth=max_depth,
+            random_state=random_state,
             oob_score=True
         )
     
